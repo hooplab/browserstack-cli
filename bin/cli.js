@@ -106,7 +106,7 @@ program
   .action(makeATunnel)
 
 function makeATunnel(hostAndPort){
-  makeBS().tunnel({
+  var tunnel = makeBS().tunnel({
     hostAndPort: hostAndPort,
     key: program.key,
     usePrivateKey: program['private']
@@ -114,6 +114,15 @@ function makeATunnel(hostAndPort){
     console.log('Tunnel is running.')
     process.stdin.resume()
   }))
+  process.on('SIGINT', cleanUp)
+  process.on('SIGTERM', cleanUp)
+  process.on('SIGHUP', cleanUp)
+  process.on('exit', cleanUp)
+  function cleanUp(){
+    process.stdin.resume()
+    tunnel.stop()
+    process.exit()
+  }
 }
 
 program

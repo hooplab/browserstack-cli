@@ -38,18 +38,18 @@ function launchBrowser(browserSpec, url){
   var version = browserSpec.split(':')[1]
   var os_name
   var os_version
-  if (program.os){
-    var parts = program.os.split(':')
-    os_name = parts[0]
-    os_version = parts[1]
-  }
-  makeBS().launch({
+  var config = {
     browser: browser,
     browser_version: version,
-    os: os_name,
-    os_version: os_version,
     url: url
-  }, exitIfErrorElse(function(job){
+  }
+  if (program.os){
+    var parts = program.os.split(':')
+    config.os = parts[0]
+    config.os_version = parts[1]
+  }
+  
+  makeBS().launch(config, exitIfErrorElse(function(job){
     console.log('Launched job ' + job.id + '.')
     if (program.attach){
       console.log('Ctrl-C to kill job.')

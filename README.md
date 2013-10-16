@@ -78,7 +78,7 @@ or kill'em all
       -V, --version               output the version number
       -u, --user <user:password>  Browserstack authentication
       -a, --attach                Attach process to launched browser
-      -o, --os                    The os of the browser or device. Defaults to "win"
+      -o, --os <name:version>     The OS of the browser or device.
       -t, --timeout <seconds>     Launch duration after which browsers exit
       -p, --private               Use the private web tunneling key for manual testing
       -k, --key <key>             Tunneling key

@@ -48,7 +48,8 @@ function launchBrowser(browserSpec, url){
     browser_version: version,
     os: os_name,
     os_version: os_version,
-    url: url
+    url: url,
+    timeout: program.timeout
   }, exitIfErrorElse(function(job){
     console.log('Launched job ' + job.id + '.')
     if (program.attach){

@@ -36,21 +36,21 @@ program
 function launchBrowser(browserSpec, url){
   var browser = browserSpec.split(':')[0]
   var version = browserSpec.split(':')[1]
-  var os_name
-  var os_version
-  if (program.os){
-    var parts = program.os.split(':')
-    os_name = parts[0]
-    os_version = parts[1]
-  }
-  makeBS().launch({
+
+  var options = {
     browser: browser,
     browser_version: version,
-    os: os_name,
-    os_version: os_version,
     url: url,
     timeout: program.timeout
-  }, exitIfErrorElse(function(job){
+  }
+
+  if (program.os){
+    var parts = program.os.split(':')
+    options.os_name = parts[0]
+    options.os_version = parts[1]
+  }
+
+  makeBS().launch(options, exitIfErrorElse(function(job){
     console.log('Launched job ' + job.id + '.')
     if (program.attach){
       console.log('Ctrl-C to kill job.')

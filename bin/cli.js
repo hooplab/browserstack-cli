@@ -46,7 +46,7 @@ function launchBrowser(browserSpec, url){
 
   if (program.os){
     var parts = program.os.split(':')
-    options.os_name = parts[0]
+    options.os = parts[0]
     options.os_version = parts[1]
   }
 

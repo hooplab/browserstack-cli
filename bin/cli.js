@@ -17,6 +17,7 @@ program
   .option('-t, --timeout <seconds>', "Launch duration after which browsers exit", 30)
   .option('-p, --private', "Use the private web tunneling key for manual testing")
   .option('-k, --key <key>', "Tunneling key")
+  .option('-l, --local', "Local testing")
 
 
 program
@@ -48,6 +49,10 @@ function launchBrowser(browserSpec, url){
     var parts = program.os.split(':')
     options.os = parts[0]
     options.os_version = parts[1]
+  }
+
+  if (program.local) {
+    options['browserstack.local'] = true
   }
 
   makeBS().launch(options, exitIfErrorElse(function(job){
